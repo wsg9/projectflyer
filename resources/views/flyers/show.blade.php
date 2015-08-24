@@ -14,9 +14,8 @@
         </div>
 
         <div class="col-md-9">
-            
             @foreach ($flyer->photos as $photo)
-                <img src="{{ $photo->path }}" alt="">
+                <img src="/{{ $photo->path }}" alt="">
             @endforeach
         </div>
     </div>
@@ -25,7 +24,11 @@
 
     <h2>Add Your Photos</h2>
 
-    <form id="addPhotosForm" action="/{{ $flyer->zip }}/{{ $flyer->street }}/photos" method="POST" class="dropzone">
+    <form id="addPhotosForm" 
+          action="{{ route('store_photo_path', [$flyer->zip, $flyer->street]) }}" 
+          method="POST" 
+          class="dropzone"
+          >
         {{ csrf_field() }}
     </form>
 @stop

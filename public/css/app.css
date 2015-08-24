@@ -5999,6 +5999,8 @@ body {
   padding-bottom: 10px; }
 
 img {
-  max-width: 100%; }
+  max-width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px; }
 
 /*# sourceMappingURL=app.css.map */

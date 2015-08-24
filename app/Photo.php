@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Photo extends Model
 {
@@ -23,6 +24,10 @@ class Photo extends Model
 
         $name = time() . $file->getClientOriginalName();
 
-        $photo->path = $this->baseDir . '/' . $name;
+        $photo->path = $photo->baseDir . '/' . $name;
+
+        $file->move($photo->baseDir, $name);
+
+        return $photo;
     }
 }

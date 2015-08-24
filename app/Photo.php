@@ -10,8 +10,19 @@ class Photo extends Model
 
     protected $fillable = ['path'];
 
+    protected $baseDir = 'flyers/photos';
+
     public function flyer()
     {
         return $this->belongsTo('App\Flyer');
+    }
+
+    public static function fromForm(UploadedFile $file)
+    {
+        $photo = new static;
+
+        $name = time() . $file->getClientOriginalName();
+
+        $photo->path = $this->baseDir . '/' . $name;
     }
 }

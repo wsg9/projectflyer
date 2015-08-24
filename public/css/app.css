@@ -5995,6 +5995,10 @@ button.close {
   height: 39px; }
 
 body {
-  padding-top: 70px; }
+  padding-top: 70px;
+  padding-bottom: 10px; }
+
+img {
+  max-width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

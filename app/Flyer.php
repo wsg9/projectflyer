@@ -23,18 +23,17 @@ class Flyer extends Model
     ];
 
     /**
-     * filter the flyers
+     * Find the flyer at the given address.
      * 
-     * @param  Builder $query
      * @param  string $zip
      * @param  string $street
      * @return Builder
      */
-    public function scopeLocatedAt($query, $zip, $street)
+    public static function locatedAt($zip, $street)
     {
         $street = str_replace('-', ' ', $street);
 
-        return $query->where(compact('zip', 'street'));
+        return static::where(compact('zip', 'street'))->first();
     }
 
     

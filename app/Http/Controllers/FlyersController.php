@@ -59,6 +59,28 @@ class FlyersController extends Controller
         return view('flyers.show', compact('flyer'));
     }
 
+    public function addPhoto($zip, $street, Request $request)
+    {
+
+        $this->validate($request, [
+            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+            ]);
+
+        $file = $request->file('photo');
+
+        $name = time() . $file->getClientOriginalName();
+
+        $file->move('flyers/photos', $name);
+
+        Flyer::locatedAt($zip, $street)->addPhoto($photo);
+
+        $flyer->addPhoto();
+
+        // $flyer->photos()->create(['path' => "/flyers/photos/{$name}"]);
+
+        return 'Done.';
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

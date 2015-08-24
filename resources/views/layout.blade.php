@@ -21,8 +21,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="/pages/search">Search</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -33,7 +33,8 @@
         @yield('content')
     </div>
 
-<script src="/js/libs.js"></script>
+  <script src="/js/libs.js"></script>
+  
 @include('flash')
 </body>
 </html>

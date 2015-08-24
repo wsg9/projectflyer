@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Properties to list?</h1>
+    <h1>List a Property With Us</h1>
 
     <hr>
 

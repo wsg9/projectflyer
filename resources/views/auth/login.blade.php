@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 col-md-offset-">
+    <div class="col-md-6 col-md-offset-3">
         <form method="POST" action="/auth/login">
             {!! csrf_field() !!}
             
@@ -28,4 +28,5 @@
         @include('errors')
     </div>
 </div>
+
 @stop

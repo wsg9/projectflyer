@@ -6,6 +6,8 @@
     <div class="col-md-6 col-md-offset-3">
         <h1>Register</h1>
 
+        <hr>
+
         <form method="POST" action="/auth/register">
             {!! csrf_field() !!}
         

@@ -36,6 +36,7 @@ class Flash
 
     /**
      * Create a success message.
+     * 
      * @param  string $title
      * @param  string $message
      * @return void
@@ -47,6 +48,7 @@ class Flash
 
     /**
      * Create an error message.
+     * 
      * @param  string $title
      * @param  string $message
      * @return void
@@ -58,6 +60,7 @@ class Flash
 
     /**
      * Create an overlay message.
+     * 
      * @param  string $title
      * @param  string $message
      * @return void

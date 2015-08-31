@@ -1,9 +1,7 @@
 @inject('countries', 'App\Http\Utilities\Country')
 
-<div class="rows">
-    <div class="col-md-6">
-
-    {{ csrf_field() }}
+<div class="row">
+    <div class="col-md-9 col-lg-6">
 
         <div class="form-group">
             <label for="street">Street:</label>
@@ -35,7 +33,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-9 col-lg-6">
         <div class="form-group">
             <label for="price">Sale Price:</label>
             <input type="text" name="price" id="price" class="form-control" value="{{ old('price') }}" required>
@@ -43,15 +41,13 @@
 
         <div class="form-group">
             <label for="description">Home Description:</label>
-            <textarea type="text" name="description" id="description" class="form-control" rows="13" required>
-                {{ old('description') }}
+            <textarea type="text" name="description" id="description" class="form-control" rows="13" value="{{ old('description') }}" required>
             </textarea>
         </div>
     </div>
     
     <div class="col-md-12">
         <hr>
-
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Create Flyer</button>
         </div>

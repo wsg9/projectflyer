@@ -22,8 +22,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="/pages/search">Search</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -37,6 +37,6 @@
   <script src="/js/libs.js"></script>
   @yield('scripts.footer')
   
-@include('flash')
+  @include('flash')
 </body>
 </html>

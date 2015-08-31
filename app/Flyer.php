@@ -2,16 +2,19 @@
 
 namespace App;
 
+use App\Photo;
+use App\Flyer;
+use Illuminate\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class Flyer extends Model
 {
     /**
-     * Fillable fields for a flyer.
+     * The fillable table and it's accepted values.
      * 
      * @var array
      */
-    protected $fillable = 
+    protected $fillable =
     [
         'street',
         'city',
@@ -24,7 +27,7 @@ class Flyer extends Model
 
     /**
      * Find the flyer at the given address.
-     * 
+     *
      * @param  string $zip
      * @param  string $street
      * @return Builder
@@ -32,15 +35,21 @@ class Flyer extends Model
     public static function locatedAt($zip, $street)
     {
         $street = str_replace('-', ' ', $street);
-
+        
         return static::where(compact('zip', 'street'))->first();
     }
 
-    
+    /**
+     * Format the price of the listing.
+     * 
+     * @param  integer $price
+     * @return string
+     */
     public function getPriceAttribute($price)
     {
         return '$' . number_format($price);
     }
+
 
     public function addPhoto(Photo $photo)
     {

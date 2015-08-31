@@ -2,16 +2,31 @@
 
 namespace App;
 
+use Image;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Photo extends Model
 {
-
+    /**
+     * The associated table.
+     * 
+     * @var string
+     */
     protected $table = 'flyer_photos';
 
-    protected $fillable = ['path'];
+    /**
+     * Fillable fields for a photo.
+     * 
+     * @var array
+     */
+    protected $fillable = ['path', 'name', 'thumbnail_path'];
 
+    /**
+     * The base directory, where all photos are stored.
+     * 
+     * @var string
+     */
     protected $baseDir = 'flyers/photos';
 
     /**
@@ -25,40 +40,30 @@ class Photo extends Model
     }
 
     /**
-     * Format the name of the incoming file upload.
+     * Build a new instance from a file upload.
      * 
-     * @param  UploadedFile $file
-     * @return string|null $photo
+     * @param  string $name
+     * @return self
      */
-    public static function fromForm(UploadedFile $file)
+    public static function named($name)
     {
-        $photo = new static;
-
-        $name = time() . $file->getClientOriginalName();
-
-        $photo->path = $photo->baseDir . '/' . $name;
-
-        $file->move($photo->baseDir, $name);
-
-        return $photo;
+        return (new static)->saveAs($name);
     }
 
-    
     protected function saveAs($name)
     {
-       // $this->name = sprintf("%s-%s", time(), $name);
-       // $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
-       // $this->thumbnail_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);
+       $this->name = sprintf("%s-%s", time(), $name);
+       $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
+       $this->thumbnail_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);
 
-       // return $this;
+       return $this;
     }
-
     
     public function move(UploadedFile $file)
     {
        $file->move($this->baseDir, $this->name);
 
-       // $this->makeThumbnail();
+       $this->makeThumbnail();
 
        return $this;
     }
@@ -66,10 +71,10 @@ class Photo extends Model
     
     public function makeThumbnail()
     {
-       // Image::make($this->path)
-       //         ->fit(200)
-       //         ->save($this->thumbnail_path);
+       Image::make($this->path)
+              ->fit(200)
+               ->save($this->thumbnail_path);
 
-      //  return $this;
+      return $this;
     }
 }

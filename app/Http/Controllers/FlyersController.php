@@ -13,7 +13,7 @@ class FlyersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
 
@@ -69,16 +69,13 @@ class FlyersController extends Controller
             'photo' => 'required|mimes:jpg,jpeg,png,bmp'
             ]);
 
-        $photo = Photo::fromForm($request->file('photo'));
+        $photo = $this->makePhoto($request->file('photo'));
 
         Flyer::locatedAt($zip, $street)->addPhoto($photo);
     }
 
-
-   // public function makePhoto(UploadedFile $file)
-   // {
-   //     Photo::named($file->getClientOriginalName())->move($file);
-
-   //     return $this;
-   // }
+   protected function makePhoto(UploadedFile $file)
+   {
+    return Photo::named($file->getClientOriginalName())->move($file);
+   }
 }

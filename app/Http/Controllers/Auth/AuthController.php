@@ -28,7 +28,7 @@ class AuthController extends Controller
      * 
      * @var string
      */
-    protected $redirectPath = '/home';
+    protected $redirectPath = '/flyers/create';
 
     /**
      * Create a new authentication controller instance.

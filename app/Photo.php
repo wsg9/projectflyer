@@ -27,7 +27,7 @@ class Photo extends Model
      * 
      * @var string
      */
-    protected $baseDir = 'flyers/photos';
+    protected $baseDir = 'images/photos';
 
     /**
      * A flyer is composed of many photos.
@@ -42,13 +42,14 @@ class Photo extends Model
     /**
      * Build a new instance from a file upload.
      * 
-     * @param  string $name
+     * @param string $name
      * @return self
      */
     public static function named($name)
     {
         return (new static)->saveAs($name);
     }
+
 
     protected function saveAs($name)
     {
@@ -68,13 +69,10 @@ class Photo extends Model
        return $this;
     }
 
-    
-    public function makeThumbnail()
+    protected function makeThumbnail()
     {
-       Image::make($this->path)
-              ->fit(200)
-               ->save($this->thumbnail_path);
-
-      return $this;
+        Image::make($this->path)
+        ->fit(200)
+        ->save($this->thumbnail_path);
     }
 }

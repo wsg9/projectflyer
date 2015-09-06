@@ -6,6 +6,8 @@ use App\Photo;
 use App\Flyer;
 use Illuminate\Http\Requests\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Flyer extends Model
 {
@@ -51,6 +53,11 @@ class Flyer extends Model
     }
 
 
+    /**
+     * Add a photo to the flyer.
+     * 
+     * @param Photo $photo
+     */
     public function addPhoto(Photo $photo)
     {
         return $this->photos()->save($photo);
@@ -65,5 +72,26 @@ class Flyer extends Model
     public function photos()
     {
         return $this->hasMany('App\Photo');
+    }
+
+    /**
+     * A flyer is owned by a user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    /**
+     * Determine if the given user created the flyer.
+     * 
+     * @param  User $user
+     * @return boolean
+     */
+    public function ownedBy(User $user)
+    {
+        return $this->user_id == $user_id;
     }
 }

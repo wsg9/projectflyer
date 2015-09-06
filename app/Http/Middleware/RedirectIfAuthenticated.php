@@ -36,7 +36,7 @@ class RedirectIfAuthenticated
     {
         if ($this->auth->check())
         {
-            return redirect('flyers.create'); // was '/home'
+            return redirect('/flyer/create'); // was '/home'
         }
 
         return $next($request);

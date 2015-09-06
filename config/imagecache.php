@@ -31,8 +31,7 @@ return array(
     */
     
     'paths' => array(
-        public_path('upload'),
-        public_path('images')
+        public_path('public/flyers/photos'),
     ),
 
     /*

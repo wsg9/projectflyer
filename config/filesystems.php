@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'cloud' => '',
+    'cloud' => 's3',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,11 +48,11 @@ return [
             'root'   => storage_path('app'),
         ],
 
-        // 'ftp' => [
-        //    'driver'   => 'ftp',
-        //    'host'     => 'ftp.example.com',
-        //    'username' => 'your-username',
-        //    'password' => 'your-password',
+         'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'ftp.example.com',
+            'username' => 'your-username',
+            'password' => 'your-password',
 
             // Optional FTP Settings...
             // 'port'     => 21,
@@ -60,7 +60,7 @@ return [
             // 'passive'  => true,
             // 'ssl'      => true,
             // 'timeout'  => 30,
-        // ],
+         ],
 
     ],
 

@@ -12,12 +12,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Flyer::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => factory('App\User')->create()->id,
         'street' => $faker->streetAddress,
         'city' => $faker->city,
         'zip' => $faker->postcode,
         'state' => $faker->state,
         'country' => $faker->country,
-        'price' => $faker->numberBetween($min = 10000, $max = 5000000),
+        'price' => $faker->numberBetween(10000, 5000000),
         'description' => $faker->paragraph(4),
     ];
 });

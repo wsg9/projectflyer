@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Flyer;
 use App\Photo;
+use App\Http\Requests\ChangeFlyerRequest;
+use App\Http\Controllers\Traits\AuthorizesUsers;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlyerRequest;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FlyersController extends Controller
 {
+    use AuthorizesUsers;
 
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['show']]);
-    }
 
+        parent::__construct();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,17 +29,17 @@ class FlyersController extends Controller
      */
     public function create()
     {
-        return view('flyers/create');
+        return view('/flyer/create');
     }
 
-
+ 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param FlyerRequest $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(FlyerRequest $request)
     {
         Flyer::create($request->all());
 
@@ -51,9 +56,9 @@ class FlyersController extends Controller
      */
     public function show($zip, $street)
     {
-        $flyer = Flyer::locatedAt($zip, $street)->first();
+        $flyer = Flyer::locatedAt($zip, $street);
 
-        return view('flyers.show', compact('flyer'));
+        return view('flyer.show', compact('flyer'));
     }
 
     /**
@@ -61,21 +66,19 @@ class FlyersController extends Controller
      * 
      * @param string  $zip
      * @param string  $street
-     * @param Request $request
+     * @param ChangeFlyerRequest $request
      */
-    public function addPhoto($zip, $street, Request $request)
+    public function addPhoto($zip, $street, ChangeFlyerRequest $request)
     {
-        $this->validate($request, [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
-            ]);
-
         $photo = $this->makePhoto($request->file('photo'));
 
         Flyer::locatedAt($zip, $street)->addPhoto($photo);
     }
 
+
    protected function makePhoto(UploadedFile $file)
    {
-    return Photo::named($file->getClientOriginalName())->move($file);
+        // return Photo::fromForm($file)->store($file);
+        return Photo::named($file->getClientOriginalName())->move($file);
    }
 }
